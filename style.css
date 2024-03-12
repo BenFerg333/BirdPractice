@@ -79,7 +79,8 @@ label, select, input{
 	float: left;
 }
 form{
-	width: 100%;
+	width: 165px;
+	margin: auto;
 	height: 50px;
 }
 button:disabled, label.disabled{
