@@ -28,7 +28,12 @@ $("#reveal").on("click", function(){
 	$(".audio").append("<p>" + birdNames[count - 1][0] + "</p>")
 });
 
-//$("option").on()
+var birdForm = $("#birds");
+birdForm.onchange = formSubmit;
+
+function formSubmit(){
+	makeAudio(birdForm.value);
+}
 
 function makeAudio(name){
 	console.log("Loading " + name[1].length + " Audio file(s) for " + name[0]);
