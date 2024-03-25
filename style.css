@@ -30,6 +30,10 @@ p{
 	max-width: 500px;
 	margin: auto;
 }
+#button-container button{
+  margin: auto;
+  align-self: top;
+}
 .audio{
 	width: 300px;
 	margin: auto;
