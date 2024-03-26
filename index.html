@@ -21,9 +21,11 @@
 		<button id="shuffle">Random Bird Order</button>
 	</div>
 
-	<form id="form1">
-	  	<select id="birds" name="birds"></select>
-	  	<input type="submit" value="Submit">
+	<form id="form1" onsubmit="return false">
+	  	<select id="birds" name="birds">
+	  		<option value="bad">Choose Specific Bird</option>
+	  	</select>
+	  	<input type="submit">
 	</form>
 
 	<button id="reveal">Reveal Bird Name</button>

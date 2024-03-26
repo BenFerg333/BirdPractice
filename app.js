@@ -5,10 +5,11 @@ var birdNames = BIRDNAMES.slice();
 var count = 0;
 
 console.log("Starting Javascript");
+console.log("Bird Array:\n");
 console.log(birdNames);
 
 birdNames.forEach(function(currentValue, index, arr){
-	$("select").append("<option value=\"" + currentValue[0] + "\">" + currentValue[0] + "</option>");
+	$("select").append("<option value=\"" + currentValue[0] + "\">" + currentValue[0].replace(/[_]/gi, " ") + "</option>");
 });
 
 $("#start").on("click", function(){
@@ -18,6 +19,7 @@ $("#start").on("click", function(){
 $("#normal").on("click", function(){
 	birdNames = BIRDNAMES.slice();
 	console.log("Original bird order: " + birdNames);
+	count = 0;
 });
 $("#shuffle").on("click", function(){
 	shuffle(birdNames);
@@ -25,20 +27,24 @@ $("#shuffle").on("click", function(){
 });
 $("#reveal").on("click", function(){
 	$(".audio p").remove();
-	$(".audio").append("<p>" + birdNames[count - 1][0] + "</p>")
+	$(".audio").append("<p>" + birdNames[count - 1][0].replace(/[_]/gi, " ") + "</p>")
 });
 
+//from https://stackoverflow.com/questions/169506/obtain-form-input-fields-using-jquery
 $('#form1').submit(function() {
-    // get all the inputs into an array.
     var $inputs = $('#form1 :input');
 
-    // not sure if you wanted this, but I thought I'd add it.
-    // get an associative array of just the values.
     var values = {};
     $inputs.each(function() {
         values[this.name] = $(this).val();
     });
-    console.log(values);
+    console.log(values.birds);
+    for(var i = 0; i < birdNames.length; i++){
+    	if(birdNames[i][0].match(values.birds)){
+    		count = i+1;
+    		makeAudio(birdNames[i]);
+    	}
+    }
 });
 
 var birdForm = $("#birds");

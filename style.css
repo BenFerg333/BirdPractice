@@ -32,7 +32,18 @@ p{
 }
 #button-container button{
   margin: auto;
-  align-self: top;
+  vertical-align: top;
+}
+#form1{
+  width: fit-content;
+}
+#form1 select{
+  width: fit-content;
+  margin-left: 0;
+}
+#form1 input{
+  width: fit-content;
+  margin-left: 4px;
 }
 .audio{
 	width: 300px;
