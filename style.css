@@ -26,6 +26,13 @@ p{
   width: fit-content;
   margin: auto;
 }
+button:hover, select:hover, input:hover{
+  background-color: #203ad3;
+}
+
+option:hover{
+  background-color: #405cf5;
+}
 #container{
 	max-width: 500px;
 	margin: auto;

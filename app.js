@@ -1,6 +1,6 @@
 const BIRDNAMES = [["acorn_woodpecker", [1]], ["american_crow", [1,3]], ["annas_hummingbird", [1,2]], ["ash_throated_flycatcher", [1]], ["bewicks_wren", [3]], ["california_quail", [2]], ["california_towhee", [1,4]], 
 	["hairy_woodpecker", [2]], ["mourning_dove", [1,2]], ["northern_flicker", [2]], ["olive_sided_flycatcher", [1]], ["red_shouldered_hawk", [1]], ["red_tailed_hawk", [1]], ["song_sparrow", [1,2]], ["spotted_towhee", [1,2]],
-	["stellers_jay", [1,2]]];
+	["stellers_jay", [2,3]]];
 var birdNames = BIRDNAMES.slice();
 var count = 0;
 
@@ -9,12 +9,15 @@ console.log("Bird Array:\n");
 console.log(birdNames);
 
 birdNames.forEach(function(currentValue, index, arr){
-	$("select").append("<option value=\"" + currentValue[0] + "\">" + currentValue[0].replace(/[_]/gi, " ") + "</option>");
+	$("select").append("<option value=\"" + currentValue[0] + "\">" + toTitleCase(currentValue[0].replace(/[_]/gi, " ")) + "</option>");
 });
 
 $("#start").on("click", function(){
 	makeAudio(birdNames[count], [1]); //find way to index
 	count++;
+	if(count >= birdNames.length){
+		count = 0;
+	}
 });
 $("#normal").on("click", function(){
 	birdNames = BIRDNAMES.slice();
@@ -27,7 +30,13 @@ $("#shuffle").on("click", function(){
 });
 $("#reveal").on("click", function(){
 	$(".audio p").remove();
-	$(".audio").append("<p>" + birdNames[count - 1][0].replace(/[_]/gi, " ") + "</p>")
+	if(count == 0){
+		$(".audio").append("<p>No bird loaded</p>");
+		console.log("Can't reveal bird name: no bird loaded");
+	}
+	else{
+		$(".audio").append("<p>" + toTitleCase(birdNames[count - 1][0].replace(/[_]/gi, " ")) + "</p>");
+	}
 });
 
 //from https://stackoverflow.com/questions/169506/obtain-form-input-fields-using-jquery
@@ -49,6 +58,16 @@ $('#form1').submit(function() {
 
 var birdForm = $("#birds");
 birdForm.onchange = formSubmit;
+
+//from https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  );
+}
 
 function formSubmit(){
 	makeAudio(birdForm.value);
